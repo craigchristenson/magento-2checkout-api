@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Twocheckout_Api>
+            <version>1.0.0</version>
+        </Twocheckout_Api>
+    </modules>
+
+    <global>
+        <blocks>
+            <twocheckout>
+                <class>Twocheckout_Api_Block</class>
+            </twocheckout>
+        </blocks>
+
+        <models>
+            <twocheckout>
+                <class>Twocheckout_Api_Model</class>
+            </twocheckout>
+        </models>
+
+        <helpers>
+            <twocheckout>
+                <class>Twocheckout_Api_Helper</class>
+            </twocheckout>
+        </helpers>
+
+        <resources>
+            <twocheckout_setup>
+                <setup>
+                    <module>Twocheckout_Api</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </twocheckout_setup>
+
+            <twocheckout_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </twocheckout_write>
+
+            <twocheckout_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </twocheckout_read>
+        </resources>
+    </global>
+
+    <default>
+        <payment>
+            <twocheckout>
+                <model>twocheckout/payment</model>
+                <payment_action>authorize_capture</payment_action>
+                <title>2Checkout</title>
+            </twocheckout>
+            <twocheckout_paypal>
+                <model>twocheckout/paypal</model>
+                <payment_action>standard</payment_action>
+                <title>2Checkout PayPal</title>
+            </twocheckout_paypal>
+        </payment>
+    </default>
+
+    <frontend>
+        <layout>
+            <updates>
+                <twocheckout>
+                    <file>twocheckout.xml</file>
+                </twocheckout>
+            </updates>
+        </layout>
+        <routers>
+            <twocheckout>
+                <use>standard</use>
+                <args>
+                    <module>Twocheckout_Api</module>
+                    <frontName>twocheckout</frontName>
+                </args>
+            </twocheckout>
+        </routers>
+        <secure_url>
+            <twocheckout_redirect>/twocheckout/redirect/</twocheckout_redirect>
+        </secure_url>
+    </frontend>
+</config>

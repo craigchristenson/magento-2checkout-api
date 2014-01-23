@@ -1,0 +1,9 @@
+<layout version="0.1.0">
+    <checkout_onepage_index>
+        <reference name="head">
+        	<block type="core/template" name="twocheckout.script" template="twocheckout/script.phtml"/>
+          	<action method="addJs"><file>twocheckout/paymentForm.js</file></action>
+        </reference>
+    </checkout_onepage_index>
+
+</layout>

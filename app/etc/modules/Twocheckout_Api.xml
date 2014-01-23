@@ -1,0 +1,11 @@
+<config>
+    <modules>
+        <Twocheckout_Api>
+            <active>true</active>
+            <codePool>local</codePool>
+            <depends>
+                <Mage_Payment />
+            </depends>
+        </Twocheckout_Api>
+    </modules>
+</config>
