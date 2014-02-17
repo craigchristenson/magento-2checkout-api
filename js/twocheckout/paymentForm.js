@@ -1,10 +1,30 @@
-function successCallback(data,status,jqXHR) {
-    if(data.exception != null || (data.validationErrors != null && data.validationErrors.length > 0)){
-        console.log(data);
+var p_method_twocheckout;
+var authButtonContainer;
+var authButton;
+var TcoCheckoutType = {
+    checkoutStepPayment: null,
+    authButtonContainer: null,
+    checkoutForm: null
+};
+
+function setTcoCheckoutType() {
+    if ( document.getElementById("opc-payment") === null ) {
+        TcoCheckoutType.checkoutStepPayment = "checkout-payment-method-load";
+        TcoCheckoutType.authButtonContainer = "review-buttons-container";
+        TcoCheckoutType.checkoutForm = 'onepagecheckout_orderform';
+    } else if ( typeof( document.getElementById("checkout-step-payment") ) !== "undefined" ) {
+        TcoCheckoutType.checkoutStepPayment = "checkout-step-payment";
+        TcoCheckoutType.authButtonContainer = "checkout-step-payment";
+        TcoCheckoutType.checkoutForm = 'co-payment-form';
     }
-    else{
-        document.getElementById("twocheckout_token").value=data.response.token.token;
+}
+
+function successCallback(data,status,jqXHR) {
+    document.getElementById("twocheckout_token").value=data.response.token.token;
+    if( TcoCheckoutType.checkoutForm === 'co-payment-form' ) {
         payment.save();
+    } else {
+        checkout.save();
     }
 }
 
@@ -14,13 +34,11 @@ function errorCallback(data,status,jqXHR) {
     document.getElementById('cvv').value = '';
     document.getElementById('expMonth').value = '';
     document.getElementById('expYear').value = '';
-    var checkoutStepPayment = document.getElementById("checkout-step-payment");
-    var authButton = checkoutStepPayment.getElementsByTagName("button")[0];
     authButton.removeAttribute("onclick");
-    authButton.addEventListener("click", payment.save(), false);
+    authButton.addEventListener("click", retrieveToken, false);
 }
 
-function retrieveToken() {
+function retrieveToken(form) {
     if(typeof TCO.requestToken == 'undefined'){
         infoDiv = document.getElementById("infoArea");
         infoDiv.style.display="";
@@ -28,24 +46,25 @@ function retrieveToken() {
             "<br />" + " Status Message - Unable to process the request" + "<br />"
     }
     else {
-        TCO.requestToken(successCallback, errorCallback, 'co-payment-form');
+        TCO.requestToken(successCallback, errorCallback, TcoCheckoutType.checkoutForm );
     }
 }
 
-
 Event.observe(window, "click", function() {
-
     if( typeof( document.getElementById('payment_form_twocheckout') ) !== "undefined" ) {
+        setTcoCheckoutType();
+        if(typeof(p_method_twocheckout) === "undefined" &&
+            document.getElementById(TcoCheckoutType.authButtonContainer) !== "undefined") {
+            p_method_twocheckout = document.getElementById("payment_form_twocheckout");
+            authButtonContainer = document.getElementById(TcoCheckoutType.authButtonContainer);
+            authButton = authButtonContainer.getElementsByTagName("button")[0];
+        }
 
-        var checkoutStepPayment = document.getElementById("checkout-step-payment");
-        checkoutStepPayment.addEventListener('keyup', function () {
-            if(authButton == null) {
-                var authButton = checkoutStepPayment.getElementsByTagName("button")[0];
-                authButton.removeAttribute("onclick");
-                authButton.addEventListener("click", retrieveToken, false);
-            }
-        });
-
+        if( typeof(p_method_twocheckout) !== "undefined" && authButton.hasAttribute("onclick") &&
+            payment.currentMethod === 'twocheckout' ) {
+            var checkoutStepPayment = document.getElementById(TcoCheckoutType.checkoutStepPayment);
+            authButton.removeAttribute("onclick");
+            authButton.addEventListener("click", retrieveToken, false);
+        }
     }
-
 });
