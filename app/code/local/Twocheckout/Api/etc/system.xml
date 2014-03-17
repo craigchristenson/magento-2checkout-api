@@ -62,7 +62,7 @@
                             <show_in_store>0</show_in_store>
                         </private_key>
                         <demo translate="label">
-                            <label>2Checkout Demo Mode</label>
+                            <label>2Checkout Sandbox Mode</label>
                             <frontend_type>select</frontend_type>
                             <sort_order>40</sort_order>
                             <source_model>adminhtml/system_config_source_yesno</source_model>

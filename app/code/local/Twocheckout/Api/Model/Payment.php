@@ -1,7 +1,7 @@
 <?php
 
 
-require_once Mage::getBaseDir('lib').DS.'twocheckout'.DS.'TwocheckoutApi.php';
+require_once Mage::getBaseDir('lib').DS.'Twocheckout'.DS.'TwocheckoutApi.php';
 
 class Twocheckout_Api_Model_Payment extends Mage_Payment_Model_Method_Abstract
 {
