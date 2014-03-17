@@ -29,17 +29,17 @@ function successCallback(data,status,jqXHR) {
 }
 
 function errorCallback(data,status,jqXHR) {
-	if(data.errorCode === 200) {
-		TCO.requestToken(successCallback, errorCallback, TcoCheckoutType.checkoutForm );
-	} else {
-		alert(data.errorMsg);
-		document.getElementById('ccNo').value = '';
-		document.getElementById('cvv').value = '';
-		document.getElementById('expMonth').value = '';
-		document.getElementById('expYear').value = '';
-		authButton.removeAttribute("onclick");
-		authButton.addEventListener("click", retrieveToken, false);
-	}
+    if(data.errorCode === 200) {
+        TCO.requestToken(successCallback, errorCallback, TcoCheckoutType.checkoutForm );
+    } else {
+        alert(data.errorMsg);
+        document.getElementById('ccNo').value = '';
+        document.getElementById('cvv').value = '';
+        document.getElementById('expMonth').value = '';
+        document.getElementById('expYear').value = '';
+        authButton.removeAttribute("onclick");
+        authButton.addEventListener("click", retrieveToken, false);
+    }
 }
 
 function retrieveToken(form) {
