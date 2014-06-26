@@ -1,4 +1,4 @@
-### _[Signup free with 2Checkout and start selling!](https://www.2checkout.com/referral?r=git2co)_
+### _[Signup free with 2Checkout and start selling!](https://www.2checkout.com/signup)_
 
 ### Integrate Magento with 2Checkout Payment API (Supports PayPal Direct)
 ----------------------------------------
@@ -18,9 +18,11 @@
 8. Enter your **Private Key**. _(2Checkout Private Key)_
 9. Enter your **Secret Word** _(Must be the same value entered on your 2Checkout Site Management page.)_
 10. Select **No** under **Sandbox Mode**. _(Unless you are tesing in the 2Checkout Sandbox)_
-11. Select **Complete** under **Order Status**.
-12. Select **Yes** under **Enabled** for 2Checkout API and 2Checkout PayPal Direct.
-13. Save your changes.
+11. (Optional) Enter your 2Checkout API username and password (this is only required if you use the new Pass Through Products parameter set and Live Refunds) If you have not yet created an API user, please login to your 2Checkout account, This username and password can then be entered in API username and password fields in Magento.
+12. (Optional) Select whether or not your want to enable Live Refunds. (This uses the 2Checkout API to issue a live refund to the customer when you issue a credit memo in Magento.)
+13. Select **Complete** under **Order Status**.
+14. Select **Yes** under **Enabled** for 2Checkout API and 2Checkout PayPal Direct.
+15. Save your changes.
 
 
 #### 2Checkout Settings
@@ -31,5 +33,6 @@
 4. Enter your **Secret Word**._(Must be the same value entered in your Magento admin.)_
 5. Set the **Approved URL** to https://www.yourdomain.com/index.php/tco/redirect/success _(Replace https://www.yourstore.com with the actual URL to your store.)_
 6. Click **Save Changes**.
+7. Click the Create Username link and create a new username with API Access and API Updating selected for the Access type. More information [here](http://help.2checkout.com/articles/FAQ/How-to-create-an-API-only-Username/)
 
 Please feel free to contact 2Checkout directly with any integration questions.
