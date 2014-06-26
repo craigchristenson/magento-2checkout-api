@@ -32,26 +32,13 @@ class Twocheckout_Api_Model_Observer extends Mage_Core_Block_Abstract {
                 Twocheckout::sandbox(false);
             }
 
-            //$auth = 'Basic ' . base64_encode($username . ':' . $password);
-
             $data = array();
             $data['invoice_id'] = $creditmemo['ext_order_id'];
             $data['comment'] = $comment;
             $data['category'] = '5';
             $data['amount'] = $creditmemo_amount['grand_total'];
             $data['currency'] = 'vendor';
-            /*
-            $headers = array(
-                'Authorization: ' . $auth,
-                'Accept: application/json'
-            );
 
-            $url = 'https://www.2checkout.com/api/sales/refund_invoice';
-
-            $config = array(
-                'timeout'    => 30
-            );
-            */
             try {
                 $response = Twocheckout_Sale::refund($data);
                 $order->addStatusHistoryComment($response["response_message"]);

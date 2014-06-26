@@ -18,7 +18,7 @@
 8. Enter your **Private Key**. _(2Checkout Private Key)_
 9. Enter your **Secret Word** _(Must be the same value entered on your 2Checkout Site Management page.)_
 10. Select **No** under **Sandbox Mode**. _(Unless you are tesing in the 2Checkout Sandbox)_
-11. (Optional) Enter your 2Checkout API username and password (this is only required if you use the new Pass Through Products parameter set and Live Refunds) If you have not yet created an API user, please login to your 2Checkout account, This username and password can then be entered in API username and password fields in Magento.
+11. (Optional) Enter your 2Checkout Admin API username and password (this is only required if you use Live Refunds functionality) If you have not yet created an Admin API user, please login to your 2Checkout account, and do so. This username and password can then be entered in API username and password fields in Magento.
 12. (Optional) Select whether or not your want to enable Live Refunds. (This uses the 2Checkout API to issue a live refund to the customer when you issue a credit memo in Magento.)
 13. Select **Complete** under **Order Status**.
 14. Select **Yes** under **Enabled** for 2Checkout API and 2Checkout PayPal Direct.
