@@ -43,7 +43,7 @@ class Twocheckout_Api_Model_Observer extends Mage_Core_Block_Abstract {
                 $response = Twocheckout_Sale::refund($data);
                 $order->addStatusHistoryComment($response["response_message"]);
                 $order->save();
-            } catch (Exception $e) {
+            } catch (Twocheckout_Error $e) {
                 Mage::throwException(Mage::helper('core')->__($e->getMessage()));
             }
             
