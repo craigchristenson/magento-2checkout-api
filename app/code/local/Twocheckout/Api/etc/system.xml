@@ -70,10 +70,38 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </demo>
+                         <refund translate="label">
+                            <label>Live Refunds</label>
+                            <comment>**IMPORTANT** Requires API Username and Password. Select 'Yes' to enable live refunds through 2Checkout when sending credit memos in Magento. This will actually issue refunds for the credit memo amount.</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>45</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </refund>                       
+                         <username translate="label">
+                            <label>API Username</label>
+                            <comment>Required if 'Live Refunds' is set to 'Yes'.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </username>
+                        <password translate="label">
+                            <label>API Password</label>
+                            <comment>Required if 'Live Refunds' is set to 'Yes'.</comment>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>55</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </password>                       
                         <allowspecific translate="label">
                             <label>Payment from Applicable Countries</label>
                             <frontend_type>allowspecific</frontend_type>
-                            <sort_order>45</sort_order>
+                            <sort_order>60</sort_order>
                             <source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -82,7 +110,7 @@
                         <specificcountry translate="label">
                             <label>Payment from Specific Countries</label>
                             <frontend_type>multiselect</frontend_type>
-                            <sort_order>50</sort_order>
+                            <sort_order>65</sort_order>
                             <source_model>adminhtml/system_config_source_country</source_model>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>

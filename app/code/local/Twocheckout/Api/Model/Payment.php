@@ -1,7 +1,7 @@
 <?php
 
 
-require_once Mage::getBaseDir('lib').DS.'Twocheckout'.DS.'TwocheckoutApi.php';
+require_once Mage::getBaseDir('lib').DS.'Twocheckout.php';
 
 class Twocheckout_Api_Model_Payment extends Mage_Payment_Model_Method_Abstract
 {
@@ -52,9 +52,14 @@ class Twocheckout_Api_Model_Payment extends Mage_Payment_Model_Method_Abstract
     public function __construct()
     {
         if ($this->getDemo()) {
-            TwocheckoutApi::setCredentials($this->getSid(), $this->getPrivateKey(), 'sandbox');
+            Twocheckout::privateKey($this->getPrivateKey());
+            Twocheckout::sellerId($this->getSid());
+            Twocheckout::sandbox(true);
+
         } else {
-            TwocheckoutApi::setCredentials($this->getSid(), $this->getPrivateKey());
+            Twocheckout::privateKey($this->getPrivateKey());
+            Twocheckout::sellerId($this->getSid());
+            Twocheckout::sandbox(false);
         }
     }
 
