@@ -41,6 +41,7 @@ class Twocheckout_Api_Model_Observer extends Mage_Core_Block_Abstract {
 
             try {
                 $response = Twocheckout_Sale::refund($data);
+                $order->setState(Mage_Sales_Model_Order::STATE_CANCELED, true)->save();
                 $order->addStatusHistoryComment($response["response_message"]);
                 $order->save();
             } catch (Twocheckout_Error $e) {
