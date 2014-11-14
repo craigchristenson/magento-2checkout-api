@@ -37,16 +37,14 @@ class Twocheckout_Api_Model_Payment extends Mage_Payment_Model_Method_Abstract
         return $demo;
     }
 
-    public function getApiUrl()
+    public function getEnvJS()
     {
         if ($this->getDemo()) {
-            $link = '<script src="https://sandbox.2checkout.com/checkout/api/script/publickey/key.js"></script>
-                        <script src="https://sandbox.2checkout.com/checkout/api/2co.min.js"></script>';
+            $result = "<script>var TcoEnv='sandbox'</script>";
         } else {
-            $link = '<script src="https://www.2checkout.com/checkout/api/script/publickey/key.js"></script>
-                        <script src="https://www.2checkout.com/checkout/api/2co.min.js"></script>';
+            $result = "<script>var TcoEnv='production'</script>";
         }
-        return $link;
+        return $result;
     }
 
     public function __construct()
@@ -109,7 +107,7 @@ class Twocheckout_Api_Model_Payment extends Mage_Payment_Model_Method_Abstract
             $charge = Twocheckout_Charge::auth($params);
 
         } catch (Twocheckout_Error $e) {
-            Mage::throwException(Mage::helper('paygate')->__($e->getMessage()));
+            Mage::throwException(Mage::helper('paygate')->__('Authorization Failed'));
         }
 
         if ($charge['response']['responseCode'] == 'APPROVED') {
