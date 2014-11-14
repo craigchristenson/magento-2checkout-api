@@ -6,30 +6,29 @@
         <div class="input-box">
             <table>
                 <tr>
-                    <td><input value="" type="text" id="ccNo" class="required-entry input-text"/></td>
-                    <td><div id="<?php echo $_code ?>_card_icon"></div></td>
+                    <td><input value="" type="text" pattern="\d*" id="ccNo" class="required-entry input-text validate-cc-number" autocomplete="off"/></td>
                 </tr>
             </table>
         </div>
     </li>
     <li>
         <label for="<?php echo $_code ?>_cvc" class="required"><em>*</em><?php echo $this->__("CVC") ?></label>
-        <div class="input-box">
-            <input value="" type="text" id="cvv" class="required-entry"/>
+        <div class="cvv tco-input-cvv">
+            <input value="" type="text" pattern="\d*" id="cvv" class="required-entry input-text" autocomplete="off" />
         </div>
     </li>
     <li>
         <label for="<?php echo $_code ?>_expiry_month" class="required"><em>*</em><?php echo $this->__("Expiration Date") ?></label>
         <div class="input-box">
             <div class="v-fix">
-                <select id="expMonth" class="month">
+                <select id="expMonth" class="month required-entry">
                     <?php foreach ($this->getTwocheckoutCcMonths() as $k => $v): ?>
                         <option value="<?php echo $k ? $k : '' ?>"<?php if ($k == $this->getInfoData($_code . '_expiry_month')): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
                     <?php endforeach ?>
                 </select>
             </div>
             <div class="v-fix">
-                <select id="expYear" class="year">
+                <select id="expYear" class="year required-entry">
                     <?php foreach ($this->getTwocheckoutCcYears() as $k => $v): ?>
                         <option value="<?php echo $k ? $k : '' ?>"<?php if ($k == $this->getInfoData($_code . '_expiry_year')): ?> selected="selected"<?php endif ?>><?php echo $v ?></option>
                     <?php endforeach ?>
@@ -37,6 +36,7 @@
             </div>
         </div>
     </li>
+         <li><div id="<?php echo $_code ?>_card_icon"></div></li>
     <li>
         <input id="twocheckout_token" name="token" type="hidden" value="" />
         <input id="publishableKey" type="hidden" value="<?php echo $this->getPublicKey(); ?>" />
@@ -45,3 +45,6 @@
 </ul>
 </div>
 <div id="infoArea"></div>
+<style>
+    .tco-input-cvv {width:100px;}
+</style>
