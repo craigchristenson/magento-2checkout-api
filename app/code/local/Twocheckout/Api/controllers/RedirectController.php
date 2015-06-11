@@ -25,8 +25,7 @@ class Twocheckout_Api_RedirectController extends Mage_Core_Controller_Front_Acti
     }
 
     public function successAction() {
-        $post = $this->getRequest()->getPost();
-        $insMessage = $this->getRequest()->getPost();
+        $post = [];
         foreach ($_REQUEST as $k => $v) {
             $v = htmlspecialchars($v);
             $v = stripslashes($v);
@@ -37,15 +36,10 @@ class Twocheckout_Api_RedirectController extends Mage_Core_Controller_Front_Acti
         Mage::getSingleton('checkout/session')->getQuote()->setIsActive(false)->save();
         $order = Mage::getModel('sales/order');
         $order->loadByIncrementId($session->getLastRealOrderId());
-        $hashSecretWord = Mage::getStoreConfig('payment/twocheckout/secret_word');
+        $hashSecretWord = Mage::getStoreConfig('payment/twocheckout/secret');
         $hashSid = Mage::getStoreConfig('payment/twocheckout/sid');
         $hashTotal = number_format($order->getBaseGrandTotal(), 2, '.', '');
-
-        if (Mage::getStoreConfig('payment/twocheckout/demo') == '1') {
-            $hashOrder = '1';
-        } else {
-            $hashOrder = $post['order_number'];
-        }
+        $hashOrder = $post['order_number'];
 
         $StringToHash = strtoupper(md5($hashSecretWord . $hashSid . $hashOrder . $hashTotal));
 
