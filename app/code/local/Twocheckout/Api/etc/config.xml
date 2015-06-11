@@ -49,16 +49,25 @@
         </resources>
 
         <events>
-        <sales_order_creditmemo_refund>
-          <observers>
-            <issue_creditmemo_refund>
-              <type>singleton</type>
-              <class>Twocheckout_Api_Model_Observer</class>
-              <method>issue_creditmemo_refund</method>
-            </issue_creditmemo_refund>
-          </observers>
-        </sales_order_creditmemo_refund>
-      </events>
+            <sales_order_creditmemo_refund>
+              <observers>
+                <issue_creditmemo_refund>
+                  <type>singleton</type>
+                  <class>Twocheckout_Api_Model_Observer</class>
+                  <method>issue_creditmemo_refund</method>
+                </issue_creditmemo_refund>
+              </observers>
+            </sales_order_creditmemo_refund>
+            <sales_order_place_after>
+                <observers>
+                    <feed_sales_order_observer>
+                        <type>singleton</type>
+                        <class>Twocheckout_Api_Model_Observer</class>
+                        <method>set_status_after_save_order</method>
+                    </feed_sales_order_observer>
+                </observers>
+            </sales_order_place_after>
+        </events>
     </global>
 
     <default>

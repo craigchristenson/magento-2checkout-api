@@ -12,7 +12,7 @@ class Twocheckout_Api_NotificationController extends Mage_Core_Controller_Front_
 
     public function insAction() {
         $insMessage = $this->getRequest()->getPost();
-        foreach ($_REQUEST as $k => $v) {
+        foreach ($insMessage as $k => $v) {
             $v = htmlspecialchars($v);
             $v = stripslashes($v);
             $insMessage[$k] = $v;
@@ -21,7 +21,7 @@ class Twocheckout_Api_NotificationController extends Mage_Core_Controller_Front_
         $order->loadByIncrementId($insMessage['vendor_order_id']);
         $invoice_on_fraud = Mage::getStoreConfig('payment/twocheckout/invoice_on_fraud');
         $invoice_on_order = Mage::getStoreConfig('payment/twocheckout/invoice_on_order');
-        $hashSecretWord = Mage::getStoreConfig('payment/twocheckout/secret_word');
+        $hashSecretWord = Mage::getStoreConfig('payment/twocheckout/secret');
         $hashSid = $insMessage['vendor_id'];
         $hashOrder = $insMessage['sale_id'];
         $hashInvoice = $insMessage['invoice_id'];
@@ -34,7 +34,7 @@ class Twocheckout_Api_NotificationController extends Mage_Core_Controller_Front_
         } else {
             if ($insMessage['message_type'] == 'FRAUD_STATUS_CHANGED') {
                 if ($insMessage['fraud_status'] == 'fail') {
-                $order->setState(Mage_Sales_Model_Order::STATE_CANCELED, true)->addStatusHistoryComment('Order failed fraud review.')->save();
+                    $order->setState(Mage_Sales_Model_Order::STATE_CANCELED, true)->addStatusHistoryComment('Order failed fraud review.')->save();
                 } else if ($insMessage['fraud_status'] == 'pass') {
                     $order->setState(Mage_Sales_Model_Order::STATE_PROCESSING, true)->addStatusHistoryComment('Order passed fraud review.')->save();
                     if ($invoice_on_fraud == '1') {

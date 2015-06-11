@@ -7,11 +7,11 @@ class Twocheckout_Api_Model_Payment extends Mage_Payment_Model_Method_Abstract
 {
     protected $_code	=	'twocheckout';
     protected $_isGateway                   = false;
-    protected $_canCapture                  = true;
+    protected $_canCapture                  = false;
     protected $_canCapturePartial           = false;
     protected $_canRefund                   = true;
     protected $_canUseCheckout = true;
-    protected $_isInitializeNeeded = false;
+    protected $_isInitializeNeeded = true;
     protected $_formBlockType = 'twocheckout/form';
     protected $_infoBlockType = 'twocheckout/info';
 
@@ -61,8 +61,9 @@ class Twocheckout_Api_Model_Payment extends Mage_Payment_Model_Method_Abstract
         }
     }
 
-    public function capture(Varien_Object $payment, $amount)
+    public function initialize($paymentAction, $stateObject)
     {
+        $payment = $this->getInfoInstance();
         $order = $payment->getOrder();
         $billing = $order->getBillingAddress();
         $shipping = $order->getShippingAddress();
@@ -113,10 +114,10 @@ class Twocheckout_Api_Model_Payment extends Mage_Payment_Model_Method_Abstract
         if ($charge['response']['responseCode'] == 'APPROVED') {
             $payment
                 ->setTransactionId($charge['response']['transactionId'])
-                ->setIsTransactionClosed(0);
-            $order->setState(Mage_Sales_Model_Order::STATE_PROCESSING, true)->save();
-            $order->setData('ext_order_id',$charge['response']['transactionId'] );
-            $order->save();
+                ->setIsTransactionClosed(false);
+            $order
+                ->setData('ext_order_id', $charge['response']['transactionId'])
+                ->save();
         } else {
             Mage::throwException(Mage::helper('paygate')->__('Payment capturing error: %s', "Could not Authorize Transaction"));
         }
