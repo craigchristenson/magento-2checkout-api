@@ -37,3 +37,6 @@
 14. Save your changes.
 
 Please feel free to contact 2Checkout directly with any integration questions.
+
+#### Requirements
+PHP 5.4.0 or later.
