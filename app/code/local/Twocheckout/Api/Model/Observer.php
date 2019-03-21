@@ -53,9 +53,11 @@ class Twocheckout_Api_Model_Observer extends Mage_Core_Block_Abstract {
     public function set_status_after_save_order(Varien_Event_Observer $observer) {
         $event = $observer->getEvent();
         $order = $event->getOrder();
-        $order->loadByIncrementId($order->getRealOrderId());
-        $order->setState(Mage_Sales_Model_Order::STATE_PROCESSING, true);
-        $order->save();
+        if ($order->getPayment()->getMethod() == 'twocheckout') {
+            $order->loadByIncrementId($order->getRealOrderId());
+            $order->setState(Mage_Sales_Model_Order::STATE_PROCESSING, true);
+            $order->save();
+        }
         return true;
     }
 }
