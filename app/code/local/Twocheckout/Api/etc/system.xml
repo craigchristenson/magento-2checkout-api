@@ -70,6 +70,15 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </demo>
+                        <test_mode translate="label">
+                            <label>2Checkout Demo Mode</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>41</sort_order>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </test_mode>
                          <refund translate="label">
                             <label>Live Refunds</label>
                             <comment>**IMPORTANT** Requires API Username and Password. Select 'Yes' to enable live refunds through 2Checkout when sending credit memos in Magento. This will actually issue refunds for the credit memo amount.</comment>

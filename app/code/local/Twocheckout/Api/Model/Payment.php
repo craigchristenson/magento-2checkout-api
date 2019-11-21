@@ -37,6 +37,11 @@ class Twocheckout_Api_Model_Payment extends Mage_Payment_Model_Method_Abstract
         return $demo;
     }
 
+    public function getTestMode() {
+        $test_mode = $this->getConfigData('test_mode');
+        return $test_mode;
+    }
+
     public function getEnvJS()
     {
         if ($this->getDemo()) {
@@ -89,6 +94,10 @@ class Twocheckout_Api_Model_Payment extends Mage_Payment_Model_Method_Abstract
                     "phoneNumber" => $billing->getTelephone()
                 )
             );
+
+            if ($this->getTestMode()) {
+                $params["demo"] = true;
+            }
 
             if ($shipping) {
                 $shippingAddr = array(
