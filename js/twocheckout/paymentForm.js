@@ -18,19 +18,22 @@ document.observe("dom:loaded", function() {
                             expYear: document.getElementById('expYear').value
                         };
 
-                        TCO.requestToken(args, function(data) {
-                            if ( typeof(data.errorCode) !== 'undefined' ) {
+                        TCO.requestToken(function(data) {
+                            document.getElementById("twocheckout_token").value=data.response.token.token;
+                            return callOriginal();
+                        }, function(data) {
+                            if (data.errorCode === 200) {
+                                // This error code indicates that the ajax call failed. We recommend that you retry the token request.
+                                return;
+                            } else {
                                 document.getElementById('ccNo').value = '';
                                 document.getElementById('cvv').value = '';
                                 document.getElementById('expMonth').value = '';
                                 document.getElementById('expYear').value = '';
                                 alert(data.errorMsg);
                                 return;
-                            } else {
-                                document.getElementById("twocheckout_token").value=data.response.token.token;
-                                return callOriginal();
-                            }
-                        });
+                           }
+                        }, args);
                     }
                 } else {
                     return callOriginal();

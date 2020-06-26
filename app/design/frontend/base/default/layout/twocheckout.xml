@@ -2,22 +2,7 @@
     <checkout_onepage_index>
         <reference name="head">
             <block type="core/template" name="twocheckout.script" template="twocheckout/script.phtml"/>
-            <action method="addJs"><file>twocheckout/2co.js</file></action>
             <action method="addJs"><file>twocheckout/paymentForm.js</file></action>
         </reference>
     </checkout_onepage_index>
-    <opc_index_index>
-        <reference name="head">
-            <block type="core/template" name="twocheckout.script" template="twocheckout/script.phtml"/>
-            <action method="addJs"><file>twocheckout/2co.js</file></action>
-            <action method="addJs"><file>twocheckout/paymentFormIWD.js</file></action>
-        </reference>
-    </opc_index_index>
-    <onestepcheckout_index_index>
-        <reference name="head">
-            <block type="core/template" name="twocheckout.script" template="twocheckout/script.phtml"/>
-            <action method="addJs"><file>twocheckout/2co.js</file></action>
-            <action method="addJs"><file>twocheckout/paymentFormOneStep.js</file></action>
-        </reference>
-    </onestepcheckout_index_index>
 </layout>
